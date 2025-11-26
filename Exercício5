@@ -1,0 +1,17 @@
+# =========================================
+# Exercício 05 - Integração 2D + 3D
+# Menu.tscn (Control)
+#  └─ Botao (Button)
+#
+#   Anexe este script ao Control.
+#   Conecte o sinal do botão ou deixe o script fazer isso.
+#   Ao clicar no botão, carrega Level.tscn
+# =========================================
+
+extends Control
+
+func _ready():
+	$Botao.pressed.connect(_carregar)
+
+func _carregar():
+	get_tree().change_scene_to_file("res://Level.tscn")

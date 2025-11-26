@@ -1,0 +1,38 @@
+# =========================================
+# Exercício 01 - Formas 2D
+# Formas.tscn (Node2D)
+#  ├─ Triangulo (Polygon2D)
+#  ├─ Hexagono  (Polygon2D)
+#  └─ Estrela   (Polygon2D)
+#
+#   Crie 3 Polygon2D e desenhe as formas.
+#   Em cada Polygon2D, você pode colocar uma textura.
+#   Ative "Texture Repeat" para tilear.
+#   Anexe este script ao Node2D (raiz).
+#   Ao clicar com o mouse, as cores e vértices mudam.
+# =========================================
+
+extends Node2D
+
+func _ready():
+	_randomizar()
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		_randomizar()
+
+func _randomizar():
+	for poly in get_children():
+		if poly is Polygon2D:
+			poly.color = Color.rand()
+			poly.outline_color = Color.rand()
+			poly.outline_width = 3
+
+			var cores := PackedColorArray()
+			for v in poly.polygon:
+				cores.append(Color.rand())
+			poly.vertex_colors = cores
+
+			if poly.texture:
+				poly.texture_repeat = BaseMaterial2D.TEXTURE_REPEAT_ENABLED
+				poly.texture_scale = Vector2(0.3, 0.3)

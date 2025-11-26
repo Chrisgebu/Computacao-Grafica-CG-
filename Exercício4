@@ -1,0 +1,23 @@
+# =========================================
+# Exercício 04 - Iluminação Dinâmica
+#   Adicione uma SpotLight3D na cena.
+#   Aponte a luz para o cubo.
+#   Anexe este script à SpotLight3D.
+#   Clique com o mouse para mudar a cor.
+# =========================================
+
+extends SpotLight3D
+
+var cores = [
+	Color.RED,
+	Color.GREEN,
+	Color.BLUE,
+	Color.YELLOW
+]
+
+var index := 0
+
+func _input(event):
+	if event is InputEventMouseButton and event.pressed:
+		index = (index + 1) % cores.size()
+		light_color = cores[index]

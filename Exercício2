@@ -1,0 +1,34 @@
+# =========================================
+# Exercício 02 - Troca de Texturas
+# Use a mesma cena do Exercício 01:
+# Formas.tscn (Node2D)
+#  ├─ Triangulo (Polygon2D)
+#  ├─ Hexagono  (Polygon2D)
+#  └─ Estrela   (Polygon2D)
+#
+# - Exporte duas texturas neste script.
+# - Tecla 1 → textura_listras
+# - Tecla 2 → textura_pontos
+# =========================================
+
+extends Node2D
+
+@export var textura_listras: Texture2D
+@export var textura_pontos: Texture2D
+
+func _ready():
+	_trocar_textura(textura_listras)
+
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_1:
+			_trocar_textura(textura_listras)
+		elif event.keycode == KEY_2:
+			_trocar_textura(textura_pontos)
+
+func _trocar_textura(tex):
+	for poly in get_children():
+		if poly is Polygon2D:
+			poly.texture = tex
+			poly.texture_repeat = BaseMaterial2D.TEXTURE_REPEAT_ENABLED
+			poly.texture_scale = Vector2(0.3, 0.3)
